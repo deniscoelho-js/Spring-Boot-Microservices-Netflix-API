@@ -4,6 +4,7 @@ import core.microservices.netflix.api.model.Produto;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,5 +31,18 @@ public class ProdutoRepository {
 
     public void deletarProduto(Integer id){
         produtos.removeIf(produto -> produto.getId() == id);
+    }
+
+    public Produto atualizarProduto(Produto produto){
+        Optional<Produto> produtoEncontrado = obterPorId(produto.getId());
+
+        if(produtoEncontrado.isEmpty()){
+            throw new InputMismatchException("Produto não encontrado");
+        }
+
+        deletarProduto(produto.getId());
+        produtos.add(produto);
+        return produto;
+
     }
 }
