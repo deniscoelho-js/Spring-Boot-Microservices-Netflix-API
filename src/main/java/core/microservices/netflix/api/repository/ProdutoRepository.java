@@ -1,5 +1,6 @@
 package core.microservices.netflix.api.repository;
 
+import core.microservices.netflix.api.exception.ResourceNotFoundException;
 import core.microservices.netflix.api.model.Produto;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +11,6 @@ import java.util.Optional;
 
 @Repository
 public class ProdutoRepository {
-
     private List<Produto> produtos = new ArrayList<Produto>();
     private Integer ultimoId = 0;
 
@@ -37,7 +37,7 @@ public class ProdutoRepository {
         Optional<Produto> produtoEncontrado = obterPorId(produto.getId());
 
         if(produtoEncontrado.isEmpty()){
-            throw new InputMismatchException("Produto não encontrado");
+            throw new ResourceNotFoundException("Produto não encontrado");
         }
 
         deletarProduto(produto.getId());
