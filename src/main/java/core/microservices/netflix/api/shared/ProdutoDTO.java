@@ -1,15 +1,10 @@
-package core.microservices.netflix.api.model;
+package core.microservices.netflix.api.shared;
 
-
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
-public class Produto {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class ProdutoDTO {
     private Integer id;
     private String nome;
     private Integer quantidade;
